@@ -1,0 +1,302 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/espanso/espanso/dev/schemas/match.schema.json
+matches:
+
+  # Some equivocal arrows
+  - { replace: "←", triggers: ["\\<- ", "\\leftarrow "] }
+  - { replace: "→", triggers: ["\\-> ", "\\to ", "\\rightarrow "] }
+  - { replace: "↑", triggers: ["\\/^ ", "\\^/ ", "\\uparrow "] }
+  - { replace: "↓", triggers: ["\\/v ", "\\v/ ", "\\downarrow "] }
+  - { replace: "↔", triggers: ["\\<-> "] }
+  - { replace: "↕", triggers: ["\\v/^ ", "\\^/v "] }
+  - { replace: "⇄", triggers: ["\\-><- ", "\\exchange "] }
+  - { replace: "⇔", triggers: ["\\<=> ", "\\iff ", "\\ifandonlyif "] }
+  - { replace: "↔", triggers: ["\\<-> ", "\\iff2 ", "\\ifandonlyif2 "] }
+  - { replace: "⇒", triggers: ["\\=> ", "\\implies "] }
+  - { replace: "↶", triggers: ["\\v- "] }
+  - { replace: "↷", triggers: ["\\-v "] }
+  - { replace: "⇇", triggers: ["\\<-<- "] }
+  - { replace: "⇉", triggers: ["\\->-> "] }
+  - { replace: "⇶", triggers: ["\\->->-> "] }
+  - { replace: "⇈", triggers: ["\\/^/^ ", "\\^/^/ "] }
+  - { replace: "⇊", triggers: ["\\v/v/ ", "\\/v/v "] }
+  - { replace: "⇜", triggers: ["\\<~ "] }
+  - { replace: "⇝", triggers: ["\\~> "] }
+
+  # Mathematical symbols and units
+  - { replace: "∞", triggers: ["\\inf ", "\\infinity "] }
+  - { replace: "ƒ", triggers: ["\\func ", "\\function "] }
+  - { replace: "‰", triggers: ["\\%0 ", "\\permille "] }
+  - { replace: "°", triggers: ["\\deg ", "\\degree ", "\\degrees "] }
+
+  # Mathematical operators
+  - { replace: "−", triggers: ["\\minus "] }
+  - { replace: "±", triggers: ["\\+- ", "\\plusminus "] }
+  - { replace: "∓", triggers: ["\\-+ ", "\\minusplus "] }
+  - { replace: "×", triggers: ["\\mult ", "\\times "] }
+  - { replace: "÷", triggers: ["\\div ", "\\division "] }
+  - { replace: "⁄", triggers: ["\\frac ", "\\fraction "] }
+  - { replace: "∣", triggers: ["\\divides "] }
+  - { replace: "∤", triggers: ["\\doesnotdivide ", "\\doesntdivide "] }
+  - { replace: "∶", triggers: ["\\ratio "] }
+  - { replace: "∷", triggers: ["\\proportion "] }
+  - { replace: "∝", triggers: ["\\prop ", "\\proportional "] }
+  - { replace: "↦", triggers: ["\\|-> ", "\\mapsto ", "\\maps "] }
+  - { replace: "∘", triggers: ["\\circle "] }
+
+  # Mathematical functions
+  - { replace: "√", triggers: ["\\sqrt ", "\\root ", "\\radical "] }
+  - { replace: "∛", triggers: ["\\cbrt ", "\\3root "] }
+  - { replace: "∜", triggers: ["\\4root "] }
+  - { replace: "∑", triggers: ["\\sum "] }
+  - { replace: "∏", triggers: ["\\product "] }
+  - { replace: "∫", triggers: ["\\int ", "\\integral "] }
+  - { replace: "∬", triggers: ["\\iint ", "\\2integral "] }
+  - { replace: "∭", triggers: ["\\iiint ", "\\3integral "] }
+  - { replace: "∮", triggers: ["\\oint "] }
+  - { replace: "∯", triggers: ["\\oiint ", "\\ooint "] }
+  - { replace: "∰", triggers: ["\\oiiint ", "\\oooint "] }
+  - { replace: "𝜕", triggers: ["\\partial ", "\\pd "] }
+  - { replace: "∇", triggers: ["\\nabla "] }
+  - { replace: "⌊$|$⌋", triggers: ["\\floor "] }
+  - { replace: "⌈$|$⌉", triggers: ["\\ceiling ", "\\ceil "] }
+  - { replace: "⟨$|$⟩", triggers: ["\\chevron ", "\\<> "] }
+
+  # Boolean algebra
+  - { replace: "¬", triggers: ["\\not ", "\\negate "] }
+  - { replace: "∨", triggers: ["\\or "] }
+  - { replace: "∧", triggers: ["\\and "] }
+  - { replace: "⊕", triggers: ["\\xor "] }
+  - { replace: "⊻", triggers: ["\\xor2 "] }
+  - { replace: "⊼", triggers: ["\\nand "] }
+  - { replace: "⊽", triggers: ["\\nor "] }
+
+  # Set theory
+  - { replace: "∀", triggers: ["\\forall "] }
+  - { replace: "∃", triggers: ["\\exists ", "\\exist "] }
+  - { replace: "∄", triggers: ["\\doesnotexist ", "\\doesntexist ", "\\notexist "] }
+  - { replace: "⋮", regex: "\\\\(is)?divi[ds][ai]ble(by)? " }
+  - { replace: "∈", regex: "\\\\(is)?(in|(member|element)(of)?) " }
+  - { replace: "∉", regex: "\\\\(is)?(notin|not(member|element)(of)?) " }
+  - { replace: "∋", triggers: ["\\contains "] }
+  - { replace: "∌", triggers: ["\\doesnotcontain ", "\\doesntcontain "] }
+  - { replace: "⊂", regex: "\\\\(is)?subset(of)? " }
+  - { replace: "⊄", regex: "\\\\(is)?notsubset(of)? " }
+  - { replace: "⊃", regex: "\\\\(is)?superset(of)? " }
+  - { replace: "⊅", regex: "\\\\(is)?notsuperset(of)? " }
+  - { replace: "∪", triggers: ["\\union "] }
+  - { replace: "∩", triggers: ["\\intersection ", "\\intersect "] }
+  - { replace: "∅", triggers: ["\\null ", "\\emptyset ", "\\empty "] }
+
+  # Mathematical sets
+  - { replace: "𝔹", triggers: ["\\boolean "] }
+  - { replace: "ℕ", triggers: ["\\natural "] }
+  - { replace: "ℤ", triggers: ["\\integers "] }
+  - { replace: "ℚ", triggers: ["\\rational "] }
+  - { replace: "𝕁", triggers: ["\\irrational "] }
+  - { replace: "ℝ", triggers: ["\\real "] }
+  - { replace: "ℂ", triggers: ["\\complex "] }
+  - { replace: "ℍ", triggers: ["\\quaternion "] }
+  - { replace: "ℙ", triggers: ["\\primes ", "\\polynomials ", "\\probability "] }
+  - { replace: "𝕌", triggers: ["\\universal ", "\\all "] }
+  - { replace: "𝕀", triggers: ["\\identity "] }
+  - { replace: "𝟙", triggers: ["\\indicator "] }
+  - { replace: "𝔼", triggers: ["\\expected "] }
+  - { replace: "ℵ", triggers: ["\\aleph "] }
+
+  # Logic and proofs
+  - { replace: "∴", triggers: ["\\therefore "] }
+  - { replace: "∵", triggers: ["\\because "] }
+  - { replace: "⨳", triggers: ["\\contradiction "] }
+  - { replace: "∎", triggers: ["\\qed ", "\\endofproof "] }
+
+  # Geometry
+  - { replace: "⊾", triggers: ["\\rightangle "] }
+  - { replace: "∟", triggers: ["\\rightangle2 "] }
+  - { replace: "∠", triggers: ["\\angle "] }
+  - { replace: "∡", triggers: ["\\measuredangle "] }
+  - { replace: "∢", triggers: ["\\sphericalangle "] }
+  - { replace: "⊿", triggers: ["\\righttriangle "] }
+  - { replace: "∥", triggers: ["\\|| ", "\\parallel "] }
+  - { replace: "∦", triggers: ["\\!|| ", "\\notparallel "] }
+
+  # Equality operators
+  - { replace: "≠", triggers: ["\\!= ", "\\notequal "] }
+  - { replace: "≈", triggers: ["\\~= ", "\\approxequal ", "\\approx "] }
+  - { replace: "≉", triggers: ["\\!~= ", "\\notapproxequal ", "\\notapprox "] }
+  - { replace: "≡", triggers: ["\\== ", "\\equivalent ", "\\equivalence "] }
+  - { replace: "≢", triggers: ["\\!== ", "\\notequivalent "] }
+  - { replace: "≣", triggers: ["\\=== ", "\\strictlyequivalent "] }
+  - { replace: "≗", triggers: ["\\o= ", "\\ringequal "] }
+  - { replace: "≙", triggers: ["\\est= ", "\\estimates "] }
+  - { replace: "≛", triggers: ["\\*= ", "\\starequal "] }
+  - { replace: "≜", triggers: ["\\delta= ", "\\deltaequal "] }
+  - { replace: "≝", triggers: ["\\def= ", "\\defequal "] }
+  - { replace: "≞", triggers: ["\\m= ", "\\mequal "] }
+  - { replace: "≟", triggers: ["\\?= ", "\\questionequal ", "\\questionedequal "] }
+  - { replace: "≐", triggers: ["\\.= ", "\\dotequal "] }
+  - { replace: "≅", triggers: ["\\~== ", "\\congruent ", "\\congruence "] }
+
+  # Comparison operators
+  - { replace: "≮", triggers: ["\\!< ", "\\notlt "] }
+  - { replace: "≯", triggers: ["\\!> ", "\\notgt "] }
+  - { replace: "≤", triggers: ["\\<= ", "\\lte "] }
+  - { replace: "≰", triggers: ["\\!<= ", "\\notlte "] }
+  - { replace: "≥", triggers: ["\\>= ", "\\gte "] }
+  - { replace: "≱", triggers: ["\\!>= ", "\\notgte "] }
+  - { replace: "≪", triggers: ["\\<< ", "\\muchlessthan "] }
+  - { replace: "≫", triggers: ["\\>> ", "\\muchgreaterthan "] }
+  - { replace: "⋘", triggers: ["\\<<< ", "\\verymuchlessthan "] }
+  - { replace: "⋙", triggers: ["\\>>> ", "\\verymuchgreaterthan "] }
+
+  # Superscript digits and math
+  - { replace: "⁰", triggers: ["\\^0 "] }
+  - { replace: "¹", triggers: ["\\^1 "] }
+  - { replace: "²", triggers: ["\\^2 "] }
+  - { replace: "³", triggers: ["\\^3 "] }
+  - { replace: "⁴", triggers: ["\\^4 "] }
+  - { replace: "⁵", triggers: ["\\^5 "] }
+  - { replace: "⁶", triggers: ["\\^6 "] }
+  - { replace: "⁷", triggers: ["\\^7 "] }
+  - { replace: "⁸", triggers: ["\\^8 "] }
+  - { replace: "⁹", triggers: ["\\^9 "] }
+  - { replace: "⁺", triggers: ["\\^+ "] }
+  - { replace: "⁻", triggers: ["\\^- "] }
+  - { replace: "⁼", triggers: ["\\^= "] }
+  - { replace: "⁽", triggers: ["\\^( "] }
+  - { replace: "⁾", triggers: ["\\^) "] }
+
+  # Subscript digits and math
+  - { replace: "₀", triggers: ["\\_0 "] }
+  - { replace: "₁", triggers: ["\\_1 "] }
+  - { replace: "₂", triggers: ["\\_2 "] }
+  - { replace: "₃", triggers: ["\\_3 "] }
+  - { replace: "₄", triggers: ["\\_4 "] }
+  - { replace: "₅", triggers: ["\\_5 "] }
+  - { replace: "₆", triggers: ["\\_6 "] }
+  - { replace: "₇", triggers: ["\\_7 "] }
+  - { replace: "₈", triggers: ["\\_8 "] }
+  - { replace: "₉", triggers: ["\\_9 "] }
+  - { replace: "₊", triggers: ["\\_+ "] }
+  - { replace: "₋", triggers: ["\\_- "] }
+  - { replace: "₌", triggers: ["\\_= "] }
+  - { replace: "₍", triggers: ["\\_( "] }
+  - { replace: "₎", triggers: ["\\_) "] }
+
+  # Superscript uppercase latin
+  - { replace: "ᴬ", triggers: ["\\^A "] }
+  - { replace: "ᴮ", triggers: ["\\^B "] }
+  - { replace: "ꟲ", triggers: ["\\^C "] }
+  - { replace: "ᴰ", triggers: ["\\^D "] }
+  - { replace: "ᴱ", triggers: ["\\^E "] }
+  - { replace: "ꟳ", triggers: ["\\^F "] }
+  - { replace: "ᴳ", triggers: ["\\^G "] }
+  - { replace: "ᴴ", triggers: ["\\^H "] }
+  - { replace: "ᴵ", triggers: ["\\^I "] }
+  - { replace: "ᴶ", triggers: ["\\^J "] }
+  - { replace: "ᴷ", triggers: ["\\^K "] }
+  - { replace: "ᴸ", triggers: ["\\^L "] }
+  - { replace: "ᴹ", triggers: ["\\^M "] }
+  - { replace: "ᴺ", triggers: ["\\^N "] }
+  - { replace: "ᴼ", triggers: ["\\^O "] }
+  - { replace: "ᴾ", triggers: ["\\^P "] }
+  - { replace: "ꟴ", triggers: ["\\^Q "] }
+  - { replace: "ᴿ", triggers: ["\\^R "] }
+  - { replace: "ᵀ", triggers: ["\\^T "] }
+  - { replace: "ᵁ", triggers: ["\\^U "] }
+  - { replace: "ⱽ", triggers: ["\\^V "] }
+  - { replace: "ᵂ", triggers: ["\\^W "] }
+
+  # Superscript lowercase latin
+  - { replace: "ᵃ", triggers: ["\\^a "] }
+  - { replace: "ᵇ", triggers: ["\\^b "] }
+  - { replace: "ᶜ", triggers: ["\\^c "] }
+  - { replace: "ᵈ", triggers: ["\\^d "] }
+  - { replace: "ᵉ", triggers: ["\\^e "] }
+  - { replace: "ᶠ", triggers: ["\\^f "] }
+  - { replace: "ᵍ", triggers: ["\\^g "] }
+  - { replace: "ʰ", triggers: ["\\^h "] }
+  - { replace: "ⁱ", triggers: ["\\^i "] }
+  - { replace: "ʲ", triggers: ["\\^j "] }
+  - { replace: "ᵏ", triggers: ["\\^k "] }
+  - { replace: "ˡ", triggers: ["\\^l "] }
+  - { replace: "ᵐ", triggers: ["\\^m "] }
+  - { replace: "ⁿ", triggers: ["\\^n "] }
+  - { replace: "ᵒ", triggers: ["\\^o "] }
+  - { replace: "ᵖ", triggers: ["\\^p "] }
+  - { replace: "𐞥", triggers: ["\\^q "] }
+  - { replace: "ʳ", triggers: ["\\^r "] }
+  - { replace: "ˢ", triggers: ["\\^s "] }
+  - { replace: "ᵗ", triggers: ["\\^t "] }
+  - { replace: "ᵘ", triggers: ["\\^u "] }
+  - { replace: "ᵛ", triggers: ["\\^v "] }
+  - { replace: "ʷ", triggers: ["\\^w "] }
+  - { replace: "ˣ", triggers: ["\\^x "] }
+  - { replace: "ʸ", triggers: ["\\^y "] }
+  - { replace: "ᶻ", triggers: ["\\^z "] }
+
+  # Subscript lowercase latin
+  - { replace: "ₐ", triggers: ["\\_a "] }
+  - { replace: "ₑ", triggers: ["\\_e "] }
+  - { replace: "ₕ", triggers: ["\\_h "] }
+  - { replace: "ₒ", triggers: ["\\_o "] }
+  - { replace: "ₓ", triggers: ["\\_x "] }
+  - { replace: "ₔ", triggers: ["\\_schwa "] }
+  - { replace: "ₖ", triggers: ["\\_k "] }
+  - { replace: "ₗ", triggers: ["\\_l "] }
+  - { replace: "ₘ", triggers: ["\\_m "] }
+  - { replace: "ₙ", triggers: ["\\_n "] }
+  - { replace: "ₚ", triggers: ["\\_p "] }
+  - { replace: "ₛ", triggers: ["\\_s "] }
+  - { replace: "ₜ", triggers: ["\\_t "] }
+
+  # Uppercase Greek letters
+  - { replace: "Α", triggers: ["\\Alpha "] }
+  - { replace: "Β", triggers: ["\\Beta "] }
+  - { replace: "Χ", triggers: ["\\Chi "] }
+  - { replace: "Δ", triggers: ["\\Delta "] }
+  - { replace: "Ε", triggers: ["\\Epsilon "] }
+  - { replace: "Η", triggers: ["\\Eta "] }
+  - { replace: "Γ", triggers: ["\\Gamma "] }
+  - { replace: "Ι", triggers: ["\\Iota "] }
+  - { replace: "Κ", triggers: ["\\Kappa "] }
+  - { replace: "Λ", triggers: ["\\Lambda "] }
+  - { replace: "Μ", triggers: ["\\Mu "] }
+  - { replace: "Ν", triggers: ["\\Nu "] }
+  - { replace: "Ο", triggers: ["\\Omicron "] }
+  - { replace: "Ω", triggers: ["\\Omega "] }
+  - { replace: "Π", triggers: ["\\Pi "] }
+  - { replace: "Φ", triggers: ["\\Phi "] }
+  - { replace: "Ψ", triggers: ["\\Psi "] }
+  - { replace: "Ρ", triggers: ["\\Rho "] }
+  - { replace: "Σ", triggers: ["\\Sigma "] }
+  - { replace: "Θ", triggers: ["\\Theta "] }
+  - { replace: "Τ", triggers: ["\\Tau "] }
+  - { replace: "Υ", triggers: ["\\Upsilon "] }
+  - { replace: "Ξ", triggers: ["\\Xi "] }
+  - { replace: "Ζ", triggers: ["\\Zeta "] }
+
+  # Lowercase Greek letters
+  - { replace: "α", triggers: ["\\alpha "] }
+  - { replace: "β", triggers: ["\\beta "] }
+  - { replace: "χ", triggers: ["\\chi "] }
+  - { replace: "δ", triggers: ["\\delta "] }
+  - { replace: "ε", triggers: ["\\epsilon "] }
+  - { replace: "η", triggers: ["\\eta "] }
+  - { replace: "γ", triggers: ["\\gamma "] }
+  - { replace: "ι", triggers: ["\\iota "] }
+  - { replace: "κ", triggers: ["\\kappa "] }
+  - { replace: "λ", triggers: ["\\lambda "] }
+  - { replace: "μ", triggers: ["\\mu "] }
+  - { replace: "ν", triggers: ["\\nu "] }
+  - { replace: "ο", triggers: ["\\omicron "] }
+  - { replace: "ω", triggers: ["\\omega "] }
+  - { replace: "π", triggers: ["\\pi "] }
+  - { replace: "φ", triggers: ["\\phi "] }
+  - { replace: "ψ", triggers: ["\\psi "] }
+  - { replace: "ρ", triggers: ["\\rho "] }
+  - { replace: "σ", triggers: ["\\sigma "] }
+  - { replace: "θ", triggers: ["\\theta "] }
+  - { replace: "τ", triggers: ["\\tau "] }
+  - { replace: "υ", triggers: ["\\upsilon "] }
+  - { replace: "ξ", triggers: ["\\xi "] }
+  - { replace: "ζ", triggers: ["\\zeta "] }

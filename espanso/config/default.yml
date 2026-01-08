@@ -1,0 +1,11 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/espanso/espanso/dev/schemas/config.schema.json
+
+show_notifications: false
+max_regex_buffer_size: 50
+backspace_limit: 10
+
+# Interoperability with Kanata
+win32_exclude_orphan_events: false
+
+# To allow quickly switching between keyboard layouts
+win32_keyboard_layout_cache_interval: 200

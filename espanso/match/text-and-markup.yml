@@ -1,0 +1,119 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/espanso/espanso/dev/schemas/match.schema.json
+matches:
+
+  # Text symbols and decorations
+  - { replace: "–", triggers: ['\- ', '\en- '] }
+  - { replace: "—", triggers: ['\-- ', '\em- '] }
+  - { replace: "…", triggers: ['\... '] }
+  - { replace: "’", triggers: ["\\f' "] }
+  - { replace: "‘$|$’", triggers: ["\\f'' "] }
+  - { replace: "“$|$”", triggers: ['\f"" '] }
+  - { replace: "«$|$»", triggers: ['\guillemet ', '\<<>> '] }
+  - { replace: "•", triggers: ["\\bullet ", "\\point "] }
+  - { replace: "¶", triggers: ["\\paraph ", "\\pilcrow "] }
+  - { replace: "§", triggers: ["\\section ", "\\paragraph ", "\\silcrow "] }
+  - { replace: "†", triggers: ["\\dagger ", "\\obelus "] }
+  - { replace: "‡", triggers: ["\\ddagger ", "\\doubledagger ", "\\dagger2 ", "\\diesis "] }
+  - { replace: "©", triggers: ["\\copyright ", "\\copy ", "\\(c) "] }
+  - { replace: "®", triggers: ["\\registered ", "\\reg ", "\\(r) "] }
+  - { replace: "™", triggers: ["\\trademark ", "\\trade ", "\\tm ", "\\^tm "] }
+
+  # Currency symbols
+  - { replace: "¤", triggers: ["\\currency "] }
+  - { replace: "¢", triggers: ["\\cent "] }
+  - { replace: "£", triggers: ["\\pound "] }
+  - { replace: "₣", triggers: ["\\franc "] }
+  - { replace: "₤", triggers: ["\\pound2 "] }
+  - { replace: "₩", triggers: ["\\won "] }
+  - { replace: "₪", triggers: ["\\shekel "] }
+  - { replace: "€", triggers: ["\\euro "] }
+  - { replace: "₱", triggers: ["\\peso "] }
+  - { replace: "₴", triggers: ["\\hryvnia ", "\\гривна "] }
+  - { replace: "₸", triggers: ["\\tenge "] }
+  - { replace: "₹", triggers: ["\\rupee "] }
+  - { replace: "₺", triggers: ["\\lira "] }
+  - { replace: "₽", triggers: ["\\ruble "] }
+  - { replace: "₿", triggers: ["\\bitcoin "] }
+  - { replace: "¥", triggers: ["\\yen ", "\\yuan "] }
+
+  # Full-width ASCII characters: abAB => ａｂＡＢ
+  - label: "Full-width ASCII characters: abAB => ａｂＡＢ"
+    regex: "\\\\wide(?P<TEXT>[!-~]+) "
+    replace: "{{result}}"
+    vars:
+      - name: result
+        type: script
+        params:
+          args: [python, -c, 'print("".join([chr(ord(x) + 65248) for x in "{{TEXT}}"]))']
+
+  # Special spaces
+  - { label: "Zero-width space", replace: "\u200b", triggers: ["\\zws "] }
+  - { label: "Zero-width joiner", replace: "\u200d", triggers: ["\\zwj "] }
+  - { label: "Non-breaking space", replace: "\u202f", triggers: ["\\nbsp ", "\\nobr "] }
+
+  # Block characters
+  - { replace: "░", triggers: ["\\block25 ", "\\fill25 ", "\\lightblock ", "\\blocklight "] }
+  - { replace: "▒", triggers: ["\\block50 ", "\\fill50 ", "\\mediumblock ", "\\blockmedium "] }
+  - { replace: "▓", triggers: ["\\block75 ", "\\fill75 ", "\\darkblock ", "\\blockdark "] }
+  - { replace: "█", triggers: ["\\block100 ", "\\fill100 ", "\\fullblock ", "\\blockfull ", "\\block ", "\\fill ", "\\filled "] }
+
+  # Box-drawing characters (thin)
+  - { replace: "─", triggers: ["\\boxt ", "\\boxte ", "\\boxb ", "\\boxbe ", "\\boxh "] }
+  - { replace: "│", triggers: ["\\boxl ", "\\boxle ", "\\boxr ", "\\boxre ", "\\boxv "] }
+  - { replace: "┌", triggers: ["\\boxtl ", "\\boxtlc "] }
+  - { replace: "┐", triggers: ["\\boxtr ", "\\boxtrc "] }
+  - { replace: "└", triggers: ["\\boxbl ", "\\boxblc "] }
+  - { replace: "┘", triggers: ["\\boxbr ", "\\boxbrc "] }
+  - { replace: "├", triggers: ["\\boxlt "] }
+  - { replace: "┤", triggers: ["\\boxrt "] }
+  - { replace: "┬", triggers: ["\\boxtt "] }
+  - { replace: "┴", triggers: ["\\boxbt "] }
+  - { replace: "┼", triggers: ["\\box+ "] }
+
+  # Box-drawing characters (bold)
+  - { replace: "━", triggers: ["\\boxbte ", "\\boxbb ", "\\boxbbe ", "\\boxbh "] }
+  - { replace: "┃", triggers: ["\\boxble ", "\\boxbre ", "\\boxbv "] }
+  - { replace: "┏", triggers: ["\\boxbtl ", "\\boxbtlc "] }
+  - { replace: "┓", triggers: ["\\boxbtr ", "\\boxbtrc "] }
+  - { replace: "┗", triggers: ["\\boxbbl ", "\\boxbblc "] }
+  - { replace: "┛", triggers: ["\\boxbbr ", "\\boxbbrc "] }
+  - { replace: "┣", triggers: ["\\boxblt "] }
+  - { replace: "┫", triggers: ["\\boxbrt "] }
+  - { replace: "┳", triggers: ["\\boxbtt "] }
+  - { replace: "┻", triggers: ["\\boxbbt "] }
+  - { replace: "╋", triggers: ["\\boxb+ "] }
+
+  # Box-drawing characters (double)
+  - { replace: "═", triggers: ["\\box2t ", "\\box2te ", "\\box2b ", "\\box2be ", "\\box2h "] }
+  - { replace: "║", triggers: ["\\box2l ", "\\box2le ", "\\box2r ", "\\box2re ", "\\box2v "] }
+  - { replace: "╔", triggers: ["\\box2tl ", "\\box2tlc "] }
+  - { replace: "╗", triggers: ["\\box2tr ", "\\box2trc "] }
+  - { replace: "╚", triggers: ["\\box2bl ", "\\box2blc "] }
+  - { replace: "╝", triggers: ["\\box2br ", "\\box2brc "] }
+  - { replace: "╠", triggers: ["\\box2lt "] }
+  - { replace: "╣", triggers: ["\\box2rt "] }
+  - { replace: "╦", triggers: ["\\box2tt "] }
+  - { replace: "╩", triggers: ["\\box2bt "] }
+  - { replace: "╬", triggers: ["\\box2+ "] }
+
+  # Box-drawing characters (single-double)
+  - { replace: "╒", triggers: ["\\box12tl ", "\\box12tlc "] }
+  - { replace: "╕", triggers: ["\\box12tr ", "\\box12trc "] }
+  - { replace: "╘", triggers: ["\\box12bl ", "\\box12blc "] }
+  - { replace: "╛", triggers: ["\\box12br ", "\\box12brc "] }
+  - { replace: "╞", triggers: ["\\box12lt "] }
+  - { replace: "╡", triggers: ["\\box12rt "] }
+  - { replace: "╤", triggers: ["\\box12tt "] }
+  - { replace: "╧", triggers: ["\\box12bt "] }
+  - { replace: "╪", triggers: ["\\box12+ "] }
+
+  # Box-drawing characters (double-single)
+  - { replace: "╓", triggers: ["\\box21tl ", "\\box21tlc "] }
+  - { replace: "╖", triggers: ["\\box21tr ", "\\box21trc "] }
+  - { replace: "╙", triggers: ["\\box21bl ", "\\box21blc "] }
+  - { replace: "╜", triggers: ["\\box21br ", "\\box21brc "] }
+  - { replace: "╟", triggers: ["\\box21lt "] }
+  - { replace: "╢", triggers: ["\\box21rt "] }
+  - { replace: "╥", triggers: ["\\box21tt "] }
+  - { replace: "╨", triggers: ["\\box21bt "] }
+  - { replace: "╫", triggers: ["\\box21+ "] }

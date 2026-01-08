@@ -1,0 +1,138 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/espanso/espanso/dev/schemas/match.schema.json
+
+global_vars:
+  - { name: N, type: echo, params: { echo: "" } }
+
+matches:
+
+  # N-bit integers' min and max values. Supports C#/Rust type syntax, and thousands separators.
+  #
+  # \u64max     => 18446744073709551615
+  # \i32min     => -2147483648
+  # \ushortmax  => 65535
+  # \i32min,    => -2,147,483,648
+  # \uint81max' => 2'417'851'639'229'258'349'412'351
+  # \i48min_    => -140 737 488 355 328
+
+  - label: "N-bit integers' min and max values"
+    regex: "\\\\(?P<W>(?:u?int|u|i)(?P<N>\\d+)|u?(?:short|int|long))(?P<E>min|max)(?P<S>[,'_]?) "
+    replace: "{{result}}"
+    vars:
+      - name: result
+        type: script
+        params:
+          args:
+            - python
+            - -c
+            - |-
+              signed = "{{W}}"[0] != 'u'
+              bits = int("{{N}}") if "{{N}}" else {"short":16,"int":32,"long":64}["{{W}}".lstrip('u')]
+              max = 2 ** (bits - int(signed)) - 1
+              min = -max - 1 if signed else 0
+              print(format({{E}}, ",").replace(",", "{{S}}".replace("_", " ")))
+
+  # English and Russian alphabets. Supports separators, spaces and quotes.
+  #
+  # \abc    => abcdefghijklmnopqrstuvwxyz
+  # \АБВ    => АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ
+  # \абв,   => а,б,в,г,д,е,ё,ж,з,и,й,к,л,м,н,о,п,р,с,т,у,ф,х,ц,ч,ш,щ,ъ,ы,ь,э,ю,я
+  # \ABC|'  => 'A'|'B'|'C'|'D'|'E'|'F'|'G'|'H'|'I'|'J'|'K'|'L'|'M'|'N'|'O'|'P'|'Q'|'R'|'S'|'T'|'U'|'V'|'W'|'X'|'Y'|'Z'
+  # \АБВ,_' => 'А', 'Б', 'В', 'Г', 'Д', 'Е', 'Ё', 'Ж', 'З', 'И', 'Й', 'К', 'Л', 'М', 'Н', 'О', 'П', ..., 'Э', 'Ю', 'Я'
+
+  - label: "English and Russian alphabets"
+    regex: "\\\\(?P<ABC>(?i)abc|абв)(?P<S>[,;|]?_?)(?P<Q>['\"]?) "
+    replace: "{{result}}"
+    vars:
+      - name: result
+        type: script
+        params:
+          args:
+            - python
+            - -c
+            - |-
+              alphabet = {
+                "abc": "abcdefghijklmnopqrstuvwxyz",
+                "абв": "абвгдеёжзийклмнопрстуфхцчшщъыьэюя",
+              }["{{ABC}}".lower()]
+              alphabet = alphabet.upper() if "{{ABC}}" == "{{ABC}}".upper() else alphabet
+              print("{{S}}".replace("_", " ").join([f"{{Q}}{x}{{Q}}" for x in alphabet]))
+
+  # Lorem ipsum
+  - triggers: ["\\lorem ", "\\loremipsum "]
+    replace: >-
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+      labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+      laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
+      voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+      cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+  # Number base conversions: bin>dec>bin, hex>dec>hex.
+  #
+  # \0b11011 => 27
+  # \0xA8    => 168
+  # \bin27   => 0b11011
+  # \hex168  => 0xa8
+
+  - label: "Binary number to decimal"
+    regex: "\\\\0b(?P<NUM>[01_]+) "
+    replace: "{{result}}"
+    vars: [{ name: result, type: script, params: { args: [python, -c, 'print(0b{{NUM}})'] } }]
+
+  - label: "Hexadecimal number to decimal"
+    regex: "\\\\0x(?P<NUM>[0-9a-fA-F_]+) "
+    replace: "{{result}}"
+    vars: [{ name: result, type: script, params: { args: [python, -c, 'print(0x{{NUM}})'] } }]
+
+  - label: "Decimal number to binary"
+    regex: "\\\\bin(?P<NUM>[0-9_]+) "
+    replace: "{{result}}"
+    vars: [{ name: result, type: script, params: { args: [python, -c, 'print(bin({{NUM}}))'] } }]
+
+  - label: "Decimal number to hexadecimal"
+    regex: "\\\\hex(?P<NUM>[0-9_]+) "
+    replace: "{{result}}"
+    vars: [{ name: result, type: script, params: { args: [python, -c, 'print(hex({{NUM}}))'] } }]
+
+  # Unicode codepoint escape sequences.
+  #
+  # \ua9       => ©
+  # \u1FA8F    => 🪏
+  # \u{1f988}  => 🦈
+  # \&#128128  => 💀
+  # \&#x1f984; => 🦄
+
+  - label: "Unicode hex escape sequence to symbol"
+    regex: "\\\\u\\{?(?P<CP>[0-9a-fA-F]+)\\}? "
+    replace: "{{result}}"
+    vars: [{ name: result, type: script, params: { args: [node, -e, 'console.log("\u{{{CP}}}")'] } }]
+
+  - label: "HTML/XML hex/dec escape sequence to symbol"
+    regex: "\\\\&#(?P<CP>x?[0-9a-fA-F]+);? "
+    replace: "{{result}}"
+    vars: [{ name: result, type: script, params: { args: [node, -e, 'console.log(String.fromCodePoint(0{{CP}}))'] } }]
+
+  # Keyboard input to UTF-8 bytes
+  - label: "Convert keyboard input to UTF-8 bytes"
+    regex: "\\\\8(?P<X>\\S+) "
+    replace: "{{result}}"
+    vars: [{
+        name: result, type: script,
+        params: { args: [python, -c, 'print(", ".join([hex(x) for x in r"{{X}}@"[:-1].encode()]))'] }
+      }]
+
+  # C# XML docs keywords
+  - { replace: '<see langword="true"/>', triggers: ["\\cstrue "] }
+  - { replace: '<see langword="false"/>', triggers: ["\\csfalse "] }
+  - { replace: '<see langword="null"/>', triggers: ["\\csnull "] }
+  - { replace: '<see langword="default"/>', triggers: ["\\csdefault "] }
+
+  # Running keyboard-entered Python and JavaScript code
+  - label: "Run keyboard-entered Python code (mind the regex buffer size)"
+    regex: "\\\\py\\{(?P<CODE>[^}]+)\\}=? "
+    replace: "{{result}}"
+    vars: [{ name: result, type: script, params: { args: [python, -c, 'print({{CODE}})'] } }]
+
+  - label: "Run JavaScript code (mind the regex buffer size)"
+    regex: "\\\\js\\{(?P<CODE>[^}]+)\\}=? "
+    replace: "{{result}}"
+    vars: [{ name: result, type: script, params: { args: [node, -e, 'console.log({{CODE}})'] } }]

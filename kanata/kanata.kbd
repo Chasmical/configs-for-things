@@ -1,0 +1,7 @@
+(defcfg
+  ;; process-unmapped-keys yes
+)
+
+(deflocalkeys-winiov2 fn 255)
+(defsrc fn menu)
+(deflayer base \ rctrl)

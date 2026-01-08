@@ -1,0 +1,35 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/espanso/espanso/dev/schemas/match.schema.json
+matches:
+
+  # Emojis
+  - { replace: "🤔", triggers: ["\\thinking "] }
+  - { replace: "❤️", triggers: ["\\<3 ", "\\heart "] }
+  - { replace: "👍", triggers: ["\\+1 ", "\\thumbsup "] }
+  - { replace: "👎", triggers: ["\\-1 ", "\\thumbsdown "] }
+  - { replace: "✅", triggers: ["\\check ", "\\checkmark "] }
+  - { replace: "❌", triggers: ["\\cross ", "\\crossmark "] }
+  - { replace: "⭐", triggers: ["\\star "] }
+  - { replace: "🌟", triggers: ["\\sparklingstar ", "\\shiningstar ", "\\shinystar "] }
+  - { replace: "✨", triggers: ["\\sparkle ", "\\sparkles "] }
+
+  # Emoticons
+  - { replace: '¯\_(ツ)_/¯', triggers: ["\\shrug "] }
+
+  # Stars rating: ★★★⯪☆.
+  #
+  # \stars0/3   => ☆☆☆
+  # \stars2/5   => ★★☆☆☆
+  # \stars3.5/5 => ★★★⯪☆
+
+  - label: "Stars rating: ★★★⯪☆"
+    regex: "\\\\stars(?P<X>\\d(?:\\.5)?)/(?P<Y>\\d+) "
+    replace: "{{result}}"
+    vars:
+      - name: result
+        type: script
+        params:
+          args:
+            - python
+            - -c
+            - |-
+              print("★" * int({{X}}) + "⯪" * int({{X}} % 1 != 0) + "☆" * int({{Y}}-{{X}}))

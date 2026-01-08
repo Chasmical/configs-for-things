@@ -1,0 +1,110 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/espanso/espanso/dev/schemas/match.schema.json
+matches:
+
+  # Trigger format: '\c^NAME' for diacritics placed above and '\c_NAME' for below.
+
+  # Combining diacritics (above)
+  - { replace: "\u0300", triggers: ["\\c^graveaccent ", "\\c^` "] }
+  - { replace: "\u0301", triggers: ["\\c^acuteaccent ", "\\c' ", "\\' "] } # special, no above/below specifier
+  - { replace: "\u0302", triggers: ["\\c^circumflexaccent ", "\\c^^ "] }
+  - { replace: "\u0303", triggers: ["\\c^tilde ", "\\c^~ "] }
+  - { replace: "\u0304", triggers: ["\\c^macron ", "\\c^- "] }
+  - { replace: "\u0305", triggers: ["\\c^overline ", "\\c^_ "] }
+  - { replace: "\u0306", triggers: ["\\c^breve ", "\\c^u "] }
+  - { replace: "\u0307", triggers: ["\\c^dot ", "\\c^. "] }
+  - { replace: "\u0308", triggers: ["\\c^diaeresis ", "\\c^.. "] }
+  - { replace: "\u0309", triggers: ["\\c^hook ", "\\c^? "] }
+  - { replace: "\u030a", triggers: ["\\c^ring ", "\\c^deg "] }
+  - { replace: "\u030b", triggers: ["\\c^doubleacuteaccent ", "\\c^\" ", "\\c^'' "] }
+  - { replace: "\u030c", triggers: ["\\c^caron ", "\\c^v "] }
+  - { replace: "\u030d", triggers: ["\\c^verticalline ", "\\c^| "] }
+  - { replace: "\u030e", triggers: ["\\c^doubleverticalline ", "\\c^|| "] }
+  - { replace: "\u030f", triggers: ["\\c^doublegraveaccent ", "\\c^`` "] }
+  - { replace: "\u0310", triggers: ["\\c^candrabindu ", "\\c^u. ", "\\c^.u "] }
+  - { replace: "\u0311", triggers: ["\\c^invertedbreve ", "\\c^!u "] }
+  - { replace: "\u0312", triggers: ["\\c^turnedcomma "] }
+  - { replace: "\u0313", triggers: ["\\c^comma ", "\\c^, "] }
+  - { replace: "\u0314", triggers: ["\\c^reversedcomma ", "\\c^!, "] }
+  - { replace: "\u0315", triggers: ["\\c^commaright ", "\\c^,> "] }
+  - { replace: "\u031a", triggers: ["\\c^leftangle "] }
+  - { replace: "\u031b", triggers: ["\\c^horn "] }
+  - { replace: "\u033d", triggers: ["\\c^X ", "\\c^mult "] }
+  - { replace: "\u033e", triggers: ["\\c^verticaltilde ", "\\c^vert~ ", "\\c^v~ "] }
+  - { replace: "\u033f", triggers: ["\\c^doubleoverline ", "\\c^= "] }
+  - { replace: "\u0344", triggers: ["\\c^greekdialytikatonos ", "\\c^.,. "] }
+  - { replace: "\u0345", triggers: ["\\c^ypogegrammeni "] }
+  - { replace: "\u0346", triggers: ["\\c^bridge ", "\\c^TT "] }
+  - { replace: "\u034a", triggers: ["\\c^nottilde ", "\\c^!~ "] }
+  - { replace: "\u034b", triggers: ["\\c^homothetic ", "\\c^~| "] }
+  - { replace: "\u034c", triggers: ["\\c^almostequalto ", "\\c^~= "] }
+  - { replace: "\u0350", triggers: ["\\c^rightarrowhead ", "\\c^> "] }
+  - { replace: "\u0351", triggers: ["\\c^lefthalfring ", "\\c^c "] }
+  - { replace: "\u0352", triggers: ["\\c^fermata ", "\\c^!u. ", "\\c^.!u "] }
+  - { replace: "\u0357", triggers: ["\\c^righthalfring ", "\\c^!c "] }
+  - { replace: "\u0358", triggers: ["\\c^dotright ", "\\c^.> "] }
+  - { replace: "\u035b", triggers: ["\\c^zigzag ", "\\c^z ", "\\c^!z "] }
+  - { replace: "\u035d", triggers: ["\\c^doublebreve ", "\\c^uu "] }
+  - { replace: "\u035e", triggers: ["\\c^doublemacron ", "\\c^-- "] }
+  - { replace: "\u0360", triggers: ["\\c^doubletilde ", "\\c^~~ "] }
+  - { replace: "\u0361", triggers: ["\\c^doubleinvertedbreve ", "\\c^!uu "] }
+  - { replace: "\u0363", triggers: ["\\c^a "] }
+  - { replace: "\u0364", triggers: ["\\c^e "] }
+  - { replace: "\u0365", triggers: ["\\c^i "] }
+  - { replace: "\u0366", triggers: ["\\c^o "] }
+  - { replace: "\u0367", triggers: ["\\c^u "] }
+  - { replace: "\u0368", triggers: ["\\c^c "] }
+  - { replace: "\u0369", triggers: ["\\c^d "] }
+  - { replace: "\u036a", triggers: ["\\c^h "] }
+  - { replace: "\u036b", triggers: ["\\c^m "] }
+  - { replace: "\u036c", triggers: ["\\c^r "] }
+  - { replace: "\u036d", triggers: ["\\c^t "] }
+  - { replace: "\u036e", triggers: ["\\c^v "] }
+  - { replace: "\u036f", triggers: ["\\c^x "] }
+
+  # Combining diacritics (below)
+  - { replace: "\u0316", triggers: ["\\c_graveaccent ", "\\c_` "] }
+  - { replace: "\u0317", triggers: ["\\c_acuteaccent ", "\\c_' "] }
+  - { replace: "\u0318", triggers: ["\\c_lefttack ", "\\c_-| "] }
+  - { replace: "\u0319", triggers: ["\\c_righttack ", "\\c_|- "] }
+  - { replace: "\u031c", triggers: ["\\c_lefthalfring ", "\\c_c "] }
+  - { replace: "\u031d", triggers: ["\\c_uptack ", "\\c_|_ ", "\\c__| "] }
+  - { replace: "\u031e", triggers: ["\\c_downtack ", "\\c_T "] }
+  - { replace: "\u031f", triggers: ["\\c_plussign ", "\\c_+ "] }
+  - { replace: "\u0320", triggers: ["\\c_minussign "] }
+  - { replace: "\u0321", triggers: ["\\c_palatalizedhook "] }
+  - { replace: "\u0322", triggers: ["\\c_retroflexhook "] }
+  - { replace: "\u0323", triggers: ["\\c_dot ", "\\c_. "] }
+  - { replace: "\u0324", triggers: ["\\c_diaeresis ", "\\c_.. "] }
+  - { replace: "\u0325", triggers: ["\\c_ring ", "\\c_deg "] }
+  - { replace: "\u0326", triggers: ["\\c_comma ", "\\c_, "] }
+  - { replace: "\u0327", triggers: ["\\c_cedilla "] }
+  - { replace: "\u0328", triggers: ["\\c_ogonek "] }
+  - { replace: "\u0329", triggers: ["\\c_verticalline ", "\\c_| "] }
+  - { replace: "\u032a", triggers: ["\\c_bridge ", "\\c_TT "] }
+  - { replace: "\u032b", triggers: ["\\c_inverteddoublearch ", "\\c_!UU "] }
+  - { replace: "\u032c", triggers: ["\\c_caron ", "\\c_v "] }
+  - { replace: "\u032d", triggers: ["\\c_circumflexaccent ", "\\c_^ "] }
+  - { replace: "\u032e", triggers: ["\\c_breve ", "\\c_u "] }
+  - { replace: "\u032f", triggers: ["\\c_invertedbreve ", "\\c_!u "] }
+  - { replace: "\u0330", triggers: ["\\c_tilde ", "\\c_~ "] }
+  - { replace: "\u0331", triggers: ["\\c_macron ", "\\c_- "] }
+  - { replace: "\u0332", triggers: ["\\c_lowline ", "\\c__ "] }
+  - { replace: "\u0333", triggers: ["\\c_doublelowline ", "\\c___ "] }
+  - { replace: "\u0339", triggers: ["\\c_righthalfring ", "\\c_!c "] }
+  - { replace: "\u033a", triggers: ["\\c_invertedbridge ", "\\c_!TT "] }
+  - { replace: "\u033b", triggers: ["\\c_square "] }
+  - { replace: "\u033c", triggers: ["\\c_seagull "] }
+  - { replace: "\u0347", triggers: ["\\c_equalssign ", "\\c_= "] }
+  - { replace: "\u0348", triggers: ["\\c_doubleverticalline ", "\\c_|| "] }
+  - { replace: "\u0349", triggers: ["\\c_leftangle "] }
+  - { replace: "\u034d", triggers: ["\\c_leftrightarrow ", "\\c_<-> "] }
+  - { replace: "\u034e", triggers: ["\\c_upwardsarrow ", "\\c_|^ ", "\\c_^| "] }
+  - { replace: "\u0353", triggers: ["\\c_X ", "\\c_mult "] }
+  - { replace: "\u0354", triggers: ["\\c_leftarrowhead ", "\\c_< "] }
+  - { replace: "\u0355", triggers: ["\\c_rightarrowhead ", "\\c_> "] }
+  - { replace: "\u0356", triggers: ["\\c_rightanduparrowheads ", "\\c_>^ "] }
+  - { replace: "\u0359", triggers: ["\\c_asterisk ", "\\c_* "] }
+  - { replace: "\u035a", triggers: ["\\c_doublering ", "\\c_oo "] }
+  - { replace: "\u035c", triggers: ["\\c_doublebreve ", "\\c_uu "] }
+  - { replace: "\u035f", triggers: ["\\c_doublemacron ", "\\c_-- "] }
+  - { replace: "\u0362", triggers: ["\\c_doublerightwardsarrow ", "\\c_--> "] }
