@@ -6,7 +6,6 @@ matches:
   - { replace: "→", triggers: ["\\-> ", "\\to ", "\\rightarrow "] }
   - { replace: "↑", triggers: ["\\/^ ", "\\^/ ", "\\uparrow "] }
   - { replace: "↓", triggers: ["\\/v ", "\\v/ ", "\\downarrow "] }
-  - { replace: "↔", triggers: ["\\<-> "] }
   - { replace: "↕", triggers: ["\\v/^ ", "\\^/v "] }
   - { replace: "⇄", triggers: ["\\-><- ", "\\exchange "] }
   - { replace: "⇔", triggers: ["\\<=> ", "\\iff ", "\\ifandonlyif "] }
