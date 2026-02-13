@@ -1,0 +1,101 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/espanso/espanso/dev/schemas/match.schema.json
+
+matches:
+
+  - label: "Length unit conversion (metric ⇔ imperial)"
+    regex: "\\\\(?P<NUM>[\\d./]+)(?P<FROM>in|ft|yd|mi|[mck]?m) "
+    replace: "{{result}}"
+    vars:
+      - name: result
+        type: script
+        params:
+          args:
+            - python
+            - -c
+            - |-
+              metric = ["mm", "cm", "m", "km"]
+              imperial = ["in", "ft", "yd", "mi"]
+              map = {
+                "mm": 0.001, "cm": 0.01, "m": 1, "km": 1000,
+                "in": 0.0254, "ft": 0.3048, "yd": 0.9144, "mi": 1609.344,
+              }
+
+              num = ({{NUM}}) * map["{{FROM}}"]
+              precision = len("{{NUM}}.000".split(".")[1])
+
+              if "{{FROM}}" in metric:
+                unit = "in" if num < map["ft"] \
+                  else "ft" if num < 0.1*map["mi"] \
+                  else "mi"
+              else:
+                unit = "mm" if num < map["cm"] \
+                  else "cm" if num < map["m"] \
+                  else "m"  if num < map["km"] \
+                  else "km"
+
+              print(f"{num / map[unit]:.{precision}f}{unit}")
+
+  - label: "Volume unit conversion (metric ⇔ imperial)"
+    regex: "\\\\(?P<NUM>[\\d./]+)(?P<FROM>floz|pt|gal|m³|m\\^3|m?l) "
+    replace: "{{result}}"
+    vars:
+      - name: result
+        type: script
+        params:
+          args:
+            - python
+            - -c
+            - |-
+              metric = ["ml", "l", "m³", "m^3"]
+              imperial = ["floz", "pt", "gal"]
+              map = {
+                "ml": 0.001, "l": 1, "m³": 1000, "m^3": 1000,
+                "floz": 0.0284130625, "pt": 0.56826125, "gal": 4.54609,
+              }
+
+              num = ({{NUM}}) * map["{{FROM}}"]
+              precision = len("{{NUM}}.000".split(".")[1])
+
+              if "{{FROM}}" in metric:
+                unit = "floz" if num < map["pt"] \
+                  else "pt" if num < map["gal"] \
+                  else "gal"
+              else:
+                unit = "ml" if num < map["l"] \
+                  else "l"  if num < map["m³"] \
+                  else "m³"
+
+              print(f"{num / map[unit]:.{precision}f}{unit}")
+
+  - label: "Mass unit conversion (metric ⇔ imperial)"
+    regex: "\\\\(?P<NUM>[\\d./]+)(?P<FROM>oz|lb|st|ton|[mk]?g|tn?) "
+    replace: "{{result}}"
+    vars:
+      - name: result
+        type: script
+        params:
+          args:
+            - python
+            - -c
+            - |-
+              metric = ["mg", "g", "kg", "t", "tn"]
+              imperial = ["oz", "lb", "st"]
+              map = {
+                "mg": 0.000001, "g": 0.001, "kg": 1, "t": 1000, "tn": 1000,
+                "oz": 0.028349523125, "lb": 0.45359237, "st": 6.35029318, "ton": 1016.0469088,
+              }
+
+              num = ({{NUM}}) * map["{{FROM}}"]
+              precision = len("{{NUM}}.000".split(".")[1])
+
+              if "{{FROM}}" in metric:
+                unit = "oz" if num < map["lb"] \
+                  else "lb" if num < map["ton"] \
+                  else "ton"
+              else:
+                unit = "mg" if num < map["g"] \
+                  else "g"  if num < map["kg"] \
+                  else "kg" if num < map["t"] \
+                  else "t"
+
+              print(f"{num / map[unit]:.{precision}f}{unit}")
