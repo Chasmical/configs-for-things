@@ -46,6 +46,20 @@ matches:
         params:
           args: [python, -c, 'print("".join([chr(ord(x) + 65248) for x in "{{TEXT}}"]))']
 
+  # Country flag sequences
+  - label: "Regional code to country flag sequence"
+    regex: "\\\\flag(?P<CODE>[a-z]{2}) "
+    replace: "{{result}}"
+    force_clipboard: true
+    vars:
+      - name: result
+        type: script
+        params:
+        # Python script
+          args: [python, -c, 'print("".join([chr(0x1f185 + ord(x)) for x in "{{CODE}}"]))']
+        # Node script
+        # args: [node, -e, 'console.log([..."{{CODE}}"].map(ch => String.fromCodePoint(0x1f185 + ch.charCodeAt(0))).join(""))']
+
   # Special spaces
   - { label: "Zero-width space", replace: "\u200b", triggers: ["\\zws "] }
   - { label: "Zero-width joiner", replace: "\u200d", triggers: ["\\zwj "] }
