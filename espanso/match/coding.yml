@@ -113,7 +113,7 @@ matches:
 
   # Keyboard input to UTF-8 bytes
   - label: "Convert keyboard input to UTF-8 bytes"
-    regex: "\\\\8(?P<X>\\S+) "
+    regex: "\\\\u8(?P<X>\\S+) "
     replace: "{{result}}"
     vars: [{
         name: result, type: script,
