@@ -99,3 +99,23 @@ matches:
                   else "t"
 
               print(f"{num / map[unit]:.{precision}f}{unit}")
+
+  - label: "Temperature unit conversion (Celsius ⇔ Fahrenheit)"
+    regex: "\\\\(?P<NUM>-?[\\d./]+)(?:\\\\?deg)(?P<FROM>[CcFf]) "
+    replace: "{{result}}"
+    vars:
+      - name: result
+        type: script
+        params:
+          args:
+            - python
+            - -c
+            - |-
+              precision = len("{{NUM}}.0".split(".")[1])
+
+              if "{{FROM}}".upper() == "F":
+                num, unit = ({{NUM}} - 32) * 5 / 9, "C"
+              else:
+                num, unit = {{NUM}} * 9 / 5 + 32, "F"
+
+              print(f"{num:.{precision}f}°{unit}")
