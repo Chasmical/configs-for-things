@@ -33,7 +33,52 @@ matches:
                   else "m"  if num < map["km"] \
                   else "km"
 
-              print(f"{num / map[unit]:.{precision}f}{unit}")
+              print(f"{num / map[unit]:.{precision}f}".rstrip('0').rstrip('.') + unit)
+
+  - label: "Speed unit conversion (m/s ⇔ km/h ⇔ mi/h)"
+    regex: "\\\\(?P<NUM>[\\d./]+)(?P<DIST>k?m|k|mi)(?P<PER>[p/])(?P<TIME>[sh]) "
+    replace: "{{result}}"
+    vars:
+      - name: result
+        type: script
+        params:
+          args:
+            - python
+            - -c
+            - |-
+              dist = "mi" if "{{DIST}}{{PER}}" == "mp" \
+                else "km" if "{{DIST}}" == "k" \
+                else "{{DIST}}"
+
+              map = {
+                "m": 1, "km": 1000, "mi": 1609.344,
+                "s": 1, "h": 1.0/3600,
+              }
+
+              num = ({{NUM}}) * map[dist] * map["{{TIME}}"]
+              precision = len("{{NUM}}.000".split(".")[1])
+
+              # m/s or m/h => km/h or km/s
+              # kph => mph, km/s => km/h, km/h => m/s
+              # mph => km/h, mi/h => m/s or km/s
+
+              if dist == "m":
+                to_dist, to_time = ("km", "h") if num < 1000 \
+                  else ("km", "s")
+              elif dist == "km":
+                to_dist, to_time = ("mi", "h") if "{{PER}}" == "p" \
+                  else ("km", "h") if "{{TIME}}" == "s" \
+                  else ("m", "s")
+              else:
+                to_dist, to_time = ("km", "h") if "{{PER}}" == "p" and num < 1000 \
+                  else ("m", "s") if num < 1000 \
+                  else ("km", "s")
+
+              unit = f"{to_dist}/{to_time}"
+              if unit == "mi/h":
+                unit = "mph"
+
+              print(f"{num / map[to_dist] / map[to_time]:.{precision}f}".rstrip('0').rstrip('.') + unit)
 
   - label: "Volume unit conversion (metric ⇔ imperial)"
     regex: "\\\\(?P<NUM>[\\d./]+)(?P<FROM>floz|pt|gal|m³|m\\^3|m?l) "
@@ -65,7 +110,7 @@ matches:
                   else "l"  if num < map["m³"] \
                   else "m³"
 
-              print(f"{num / map[unit]:.{precision}f}{unit}")
+              print(f"{num / map[unit]:.{precision}f}".rstrip('0').rstrip('.') + unit)
 
   - label: "Mass unit conversion (metric ⇔ imperial)"
     regex: "\\\\(?P<NUM>[\\d./]+)(?P<FROM>oz|lb|st|ton|[mk]?g|tn?) "
@@ -98,7 +143,7 @@ matches:
                   else "kg" if num < map["t"] \
                   else "t"
 
-              print(f"{num / map[unit]:.{precision}f}{unit}")
+              print(f"{num / map[unit]:.{precision}f}".rstrip('0').rstrip('.') + unit)
 
   - label: "Temperature unit conversion (Celsius ⇔ Fahrenheit)"
     regex: "\\\\(?P<NUM>-?[\\d./]+)(?:\\\\?deg)(?P<FROM>[CcFf]) "
@@ -118,4 +163,4 @@ matches:
               else:
                 num, unit = {{NUM}} * 9 / 5 + 32, "F"
 
-              print(f"{num:.{precision}f}°{unit}")
+              print(f"{num:.{precision}f}".rstrip('0').rstrip('.') + "°" + unit)
