@@ -1,0 +1,67 @@
+"$schema" = "https://starship.rs/config-schema.json"
+
+add_newline = false
+continuation_prompt = "[](#007acc) "
+
+format = """
+[](fg:#003543)\
+[$os](fg:#ffffff bg:prev_fg)\
+[](fg:prev_bg bg:#0087D8)\
+[$directory](fg:#003544 bg:prev_bg)\
+(\
+  [](fg:prev_bg bg:#d2ff5e)\
+  [$git_branch$git_status](fg:#193549 bg:prev_bg)\
+)\
+[](fg:prev_bg bg:#003543)\
+[$time](fg:#ffffff bg:prev_bg)\
+(\
+  [](fg:prev_bg bg:#83769c)\
+  [$cmd_duration](fg:#ffffff bg:prev_bg)\
+)\
+[](fg:prev_bg)\
+\n$character"""
+
+# TODO: Output previous command's status code and error message
+
+[os]
+disabled = false
+format = "$symbol"
+[os.symbols]
+Windows = "  "
+
+[directory]
+format = "( 󰝰 $path )"
+use_os_path_sep = false
+truncate_to_repo = false
+truncation_length = 6
+truncation_symbol = "…/"
+
+[git_branch]
+format = "(  $branch(:$remote_branch) )"
+
+[git_status]
+format = "($conflicted$staged$renamed$modified$deleted$untracked$ahead_behind )"
+conflicted = " "
+staged = "+$count"
+modified = "~$count"
+deleted = "-$count"
+renamed = "»$count"
+untracked = "?$count"
+ahead = " ⇡"
+behind = " ⇣"
+
+# TODO: Node.js version
+# TODO: Python version
+# TODO: Rust version
+
+[time]
+disabled = false
+format = "(  $time )"
+
+[cmd_duration]
+format = "( 󱦟 $duration )"
+show_milliseconds = true
+min_time = 0
+
+[character]
+format = "[](#007acc) "

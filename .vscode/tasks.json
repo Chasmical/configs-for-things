@@ -3,7 +3,7 @@
   "tasks": [
     {
       "type": "shell",
-      "command": "pwsh ./.vscode/copy-configs.ps1",
+      "command": "pwsh .vscode/copy-configs.ps1",
       "label": "proj: copy configs to repo",
       "problemMatcher": [],
       "group": {
