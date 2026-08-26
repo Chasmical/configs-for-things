@@ -44,7 +44,7 @@ See [kanata.kbd](kanata/kanata.kbd).
 
 **[Starship](https://starship.rs)** is a customizable shell prompt.
 
-TODO: Screenshot
+![](assets/pwsh-themes.png)
 
 See [starship.toml](pwsh/starship.toml), [profile.ps1](pwsh/Microsoft.PowerShell_profile.ps1).
 

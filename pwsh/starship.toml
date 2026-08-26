@@ -4,30 +4,121 @@ add_newline = false
 continuation_prompt = "[](#007acc) "
 
 format = """
-[](fg:#003543)\
-[$os](fg:#ffffff bg:prev_fg)\
-[](fg:prev_bg bg:#0087D8)\
-[$directory](fg:#003544 bg:prev_bg)\
+$status\
+[](fg:os_bg)\
+[$os](fg:os_fg bg:prev_fg)\
+[](fg:prev_bg bg:dir_bg)\
+[$directory](fg:dir_fg bg:prev_bg)\
 (\
-  [](fg:prev_bg bg:#d2ff5e)\
-  [$git_branch$git_status](fg:#193549 bg:prev_bg)\
+  [](fg:prev_bg bg:git_bg)\
+  [$git_branch$git_status](fg:git_fg bg:prev_bg)\
 )\
-[](fg:prev_bg bg:#003543)\
-[$time](fg:#ffffff bg:prev_bg)\
 (\
-  [](fg:prev_bg bg:#83769c)\
-  [$cmd_duration](fg:#ffffff bg:prev_bg)\
+  [](fg:prev_bg bg:tool_bg)\
+  [$nodejs$rust$python ](fg:tool_fg bg:prev_bg)\
+)\
+[](fg:prev_bg bg:time_bg)\
+[$time](fg:time_fg bg:prev_bg)\
+(\
+  [](fg:prev_bg bg:dur_bg)\
+  [$cmd_duration](fg:dur_fg bg:prev_bg)\
 )\
 [](fg:prev_bg)\
 \n$character"""
 
 # TODO: Output previous command's status code and error message
 
+# palette = "unicorn"
+palette = "tokyo_night"
+# palette = "gruvbox_rainbow"
+# palette = "catppuccin_mocha"
+# palette = "catppuccin_frappe"
+
+# Unicorn theme (migrated from Oh My Posh)
+# https://github.com/JanDeDobbeleer/oh-my-posh/blob/main/themes/unicorn.omp.json
+[palettes.unicorn]
+os_fg = "#ffffff"
+os_bg = "#003543"
+dir_fg = "#003544"
+dir_bg = "#0087D8"
+git_fg = "#193549"
+git_bg = "#d2ff5e"
+tool_fg = "#193549"
+tool_bg = "#5ea7ff"
+time_fg = "#ffffff"
+time_bg = "#003543"
+dur_fg = "#ffffff"
+dur_bg = "#83769c"
+
+# Tokyo Night theme (https://starship.rs/presets/tokyo-night)
+[palettes.tokyo_night]
+os_fg = "#090c0c"
+os_bg = "#a3aed2"
+dir_fg = "#090c0c"
+dir_bg = "#769ff0"
+git_fg = "#769ff0"
+git_bg = "#394260"
+tool_fg = "#769ff0"
+tool_bg = "#283042"
+time_fg = "#a0a9cb"
+time_bg = "#1d2230"
+dur_fg = "#a0a9cb"
+dur_bg = "#121417"
+
+# Gruvbox Rainbow theme (https://starship.rs/presets/gruvbox-rainbow)
+[palettes.gruvbox_rainbow]
+os_fg = "#fbf1c7"
+os_bg = "#d65d0e"
+dir_fg = "#fbf1c7"
+dir_bg = "#d79921"
+git_fg = "#fbf1c7"
+git_bg = "#689d6a"
+tool_fg = "#fbf1c7"
+tool_bg = "#458588"
+time_fg = "#fbf1c7"
+time_bg = "#665c54"
+dur_fg = "#fbf1c7"
+dur_bg = "#3c3836"
+
+# Catppuccin Mocha and Frappe themes (https://starship.rs/presets/catppuccin-powerline)
+[palettes.catppuccin_mocha]
+os_fg = "#11111b"
+os_bg = "#f38ba8"
+dir_fg = "#11111b"
+dir_bg = "#fab387"
+git_fg = "#11111b"
+git_bg = "#f9e2af"
+tool_fg = "#11111b"
+tool_bg = "#a6e3a1"
+time_fg = "#11111b"
+time_bg = "#74c7ec"
+dur_fg = "#a0a9cb"
+dur_bg = "#121417"
+
+[palettes.catppuccin_frappe]
+os_fg = "#232634"
+os_bg = "#e78284"
+dir_fg = "#232634"
+dir_bg = "#ef9f76"
+git_fg = "#232634"
+git_bg = "#e5c890"
+tool_fg = "#232634"
+tool_bg = "#a6d189"
+time_fg = "#232634"
+time_bg = "#72b1ce"
+dur_fg = "#a0a9cb"
+dur_bg = "#121417"
+
+[status]
+disabled = false
+format = "[ Status $status(: $common_meaning)(\\($signal_number: $signal_name\\))](bold red)\n"
+
 [os]
 disabled = false
 format = "$symbol"
 [os.symbols]
 Windows = "  "
+Ubuntu = "  "
 
 [directory]
 format = "( 󰝰 $path )"
@@ -50,9 +141,14 @@ untracked = "?$count"
 ahead = " ⇡"
 behind = " ⇣"
 
-# TODO: Node.js version
-# TODO: Python version
-# TODO: Rust version
+[nodejs]
+format = "  ($version)"
+
+[python]
+format = "  $pyenv_prefix($version)(\\($virtualenv\\))"
+
+[rust]
+format = "  ($version)"
 
 [time]
 disabled = false
